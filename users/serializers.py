@@ -15,6 +15,15 @@ class CreateUserSerializer(serializers.ModelSerializer):
         fields = ['username', 'password', 'email']
 
 
+class LoginSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username', 'password']
+
+        def create(self, validated_data):
+            return User.objects.create_user(**validated_data)
+
+
 class ViewProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
@@ -24,7 +33,6 @@ class ViewProfileSerializer(serializers.ModelSerializer):
 class CreateProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        # fileds = ['name', 'has_a_family', 'is_head', 'family', 'position']
         exclude = ['user']
 
 

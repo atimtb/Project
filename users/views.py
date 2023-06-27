@@ -15,6 +15,13 @@ class Register(generics.CreateAPIView):
     serializer_class = CreateUserSerializer
 
 
+@api_view(['POST'])
+def register(request):
+    serializer = CreateUserSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    serializer.save()
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
+
 @api_view(['GET'])
 def view_profile(request):
     user = request.user
@@ -42,10 +49,9 @@ def create_profile(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-
 class ViewFamily(generics.ListAPIView):
     serializer_class = ViewFamilySerializer
-    queryset = Family.objects.filter(name='e-family')
+    queryset = Family.objects.filter(name='a-family')
 
 
 

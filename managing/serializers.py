@@ -10,8 +10,6 @@ class AddCostSerializer(serializers.ModelSerializer):
 
 
 class GetCostSerializer(serializers.ModelSerializer):
-    # total_cost = serializers.FloatField()
-
     class Meta:
         model = Costs
         fields = '__all__'
